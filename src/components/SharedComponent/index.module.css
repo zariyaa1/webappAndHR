@@ -1,0 +1,41 @@
+.mainContainer {
+  padding-left: 2.8%;
+  overflow-y: scroll;
+  height: 100%;
+}
+.header {
+  padding-left: 1%;
+  padding-top: 3%;
+}
+.heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.subHeading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 2% 0 1% 0;
+}
+.spanText {
+  color: #fd939f;
+}
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cardsStyle {
+  width: 254px;
+  margin-right: 40px;
+}
+.cardName {
+  color: #fd939f;
+  font-size: 20px;
+  font-weight: 700;
+}
+.cardDescription {
+  width: 100%;
+}

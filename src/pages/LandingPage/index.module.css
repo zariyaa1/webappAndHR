@@ -1,0 +1,14 @@
+.mainContainer {
+  background: linear-gradient(180deg, #c2478a 0%, #2f2564 100%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+
+
+.logoImg{
+  width: 500px;
+}

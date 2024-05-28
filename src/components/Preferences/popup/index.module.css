@@ -1,0 +1,52 @@
+.modalContainer {
+  background: linear-gradient(180deg, #c2478a 0%, #2f2564 100%);
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 369px;
+  width: 598px;
+  border-radius: 10px;
+  background-color: #fbbece;
+  background-image: url(../../../assets/images/wepik-doodle-pink-birthday-confetti-zoom-background-20221014-153955\ 1.svg);
+  background-position: top;
+  background-size: auto;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  outline: none;
+}
+.Mheading {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  color: #0057a3;
+  margin-top: 136px;
+  padding-bottom: 16px;
+}
+.Sheading {
+  width: 464px;
+  font-size: 16px;
+  padding-bottom: 22px;
+  font-weight: 700;
+  line-height: 19px;
+  color: #0057a3;
+  text-align: center;
+}
+
+.Mbutton > button {
+  cursor: pointer;
+  width: 500px;
+  height: 35px;
+  background: #c2478a;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  border: none;
+}

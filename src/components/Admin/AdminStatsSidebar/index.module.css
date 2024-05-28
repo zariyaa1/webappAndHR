@@ -1,0 +1,106 @@
+.mainContainer {
+  width: 25vw;
+  font-family: "Inter";
+  font-style: normal;
+}
+.secondaryContainer {
+  padding-top: 10px;
+  margin-left: 30px;
+}
+.issueContainer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+.issueMiniContainer {
+  display: flex;
+  flex-direction: column;
+}
+.mainHead {
+  font-weight: 600;
+  font-size: 20px;
+  color: #141736;
+}
+.mainDesc {
+  padding-top: 1px;
+  font-weight: 500;
+  color: #b2b2b2;
+  font-size: 0.9vw;
+}
+.issueCountContainer {
+  width: 100%;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-around;
+}
+.divider {
+  height: 29px;
+  font-weight: 500;
+  font-size: 24px;
+  color: #ec6666;
+}
+.issueCount {
+  font-weight: 500;
+  font-size: 1.25vw;
+  letter-spacing: 0.01em;
+
+  color: #000000;
+}
+.issueName {
+  font-weight: 500;
+  font-size: 0.7vw;
+  letter-spacing: 0.01em;
+
+  color: #a3a3a3;
+}
+.diffissue {
+  padding-top: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+.disordersContainer {
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.disorder {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.disorderName {
+  width: 100%;
+  padding-left: 10px;
+  display: flex;
+  align-items: start;
+  text-align: start;
+}
+.disorderImage {
+  width: 40px;
+  height: 40px;
+}
+
+.regcardCircBar {
+  font-size: 16px;
+}
+.secCont {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+.disorderSec {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+.disorderNameSec {
+  width: 100%;
+}

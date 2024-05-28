@@ -1,0 +1,21 @@
+.container {
+  background: linear-gradient(360deg, #b44486 27.4%, #352666 100%);
+  width: 82vw;
+  height: 100vh;
+}
+/* dnndcjn */
+
+.heading {
+  padding-left: 4%;
+  padding-top: 4%;
+
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.playlistContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4%;
+  padding-left: 2%;
+}

@@ -1,0 +1,16 @@
+.mainContainer {
+  display: flex;
+}
+.sidebarCont {
+  width: 15vw;
+}
+.Scont {
+  display: flex;
+  width: 100%;
+}
+.secondContainer {
+  width: 85vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

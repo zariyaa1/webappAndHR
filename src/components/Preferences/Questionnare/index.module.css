@@ -1,0 +1,67 @@
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+}
+.minicontainer1,
+.minicontainer2 {
+  padding: 0;
+  margin: 0;
+
+  height: 100vh;
+}
+.minicontainer2 {
+  width: 100%;
+  background: linear-gradient(180deg, #c2478a 0%, #2f2564 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.minicontainer1 {
+  display: flex;
+  justify-content: center;
+  background-image: url(../../../assets/images/Group\ 82.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.Qheading {
+  padding-top: 5.1vh;
+  width: 519px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  color: #ffffff;
+  text-align: center;
+}
+.choices {
+  padding-top: 7.9vh;
+  padding-bottom: 4.8vh;
+  width: 170px;
+  height: 24px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+
+  color: rgba(251, 190, 206, 0.8);
+}
+
+.formbutton__container {
+  padding-top: 5.1vh;
+}
+.formbutton__container > button {
+  width: 316px;
+  height: 40px;
+  background: #c2478a;
+  border-radius: 30px;
+  font-size: 20px;
+  border: none;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}

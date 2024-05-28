@@ -1,0 +1,25 @@
+.container {
+  background: linear-gradient(360deg, #b44486 27.4%, #352666 100%);
+  width: 82vw;
+  height: 100vh;
+}
+.mainContainer {
+  padding: 4% 2% 0 3%;
+}
+.heading {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fbbece;
+}
+.tableContainer {
+  margin-top: 3%;
+}
+.tabPanelStyle {
+  padding: 0 !important;
+}
+.blankData{
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  color: #FFFFFF;
+}

@@ -1,0 +1,40 @@
+.container{
+    background: linear-gradient(360deg, #b44486 27.4%, #352666 100%);
+  width: 82vw;
+  height: 100vh;
+}
+.mainContainer {
+    padding-left: 2.8%;
+    overflow-y: scroll;
+    height: 100%;
+
+  }
+  .heading{
+    padding-top: 4%;
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: 30px;
+    color: #FBBECE;
+
+  }
+  .cardContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .detailContainer{
+    padding-top: 2%;
+    padding-left: 1.2%;
+  }
+  .detailImage{
+    margin: 4% 0;
+  }
+  .detailHeader{
+    font-weight: 700;
+    font-size: 50px;
+    color: #ffffff;
+  }
+  .description{
+    margin: 2% 0;
+    padding-right: 2%;
+  }

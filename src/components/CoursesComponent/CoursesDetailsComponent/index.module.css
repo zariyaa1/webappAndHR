@@ -1,0 +1,77 @@
+.container {
+  background: linear-gradient(360deg, #b44486 27.4%, #352666 100%);
+  width: 82vw;
+  height: 100vh;
+}
+
+.mainContainer {
+  padding-left: 3%;
+  /* padding-right: 2%; */
+  overflow-y: scroll;
+  height: 100%;
+}
+.mainExplainationContainer {
+  padding-left: 3%;
+  overflow-y: scroll;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.leftContainer {
+  width: 60%;
+}
+.overviewCard {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 3%;
+  padding-bottom: 20px;
+}
+.rightContainer {
+  width: 33%;
+  padding-top: 5%;
+  padding-right: 1%;
+  border-left: 1px solid #fd939f;
+  height: fit-content;
+  min-height: 100%;
+}
+
+.header {
+  padding-left: 1%;
+  padding-top: 3%;
+}
+.heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.subHeading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 2% 0 1% 0;
+}
+.spanText {
+  color: #fd939f;
+}
+.card {
+  padding-left: 1%;
+}
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cardsStyle {
+  width: 254px;
+  margin-right: 40px;
+}
+.cardName {
+  color: #fd939f;
+  font-size: 20px;
+  font-weight: 700;
+}
+.cardDescription {
+  width: 100%;
+}

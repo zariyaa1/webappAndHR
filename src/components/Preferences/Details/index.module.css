@@ -1,0 +1,159 @@
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+}
+.minicontainer1,
+.minicontainer2 {
+  padding: 0;
+  margin: 0;
+
+  height: 100vh;
+}
+.minicontainer2 {
+  width: 100%;
+  background: linear-gradient(180deg, #c2478a 0%, #2f2564 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.minicontainer1 {
+  display: flex;
+  justify-content: center;
+  background-image: url(../../../assets/images/Group\ 82.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.formContainer {
+  padding-top: 15.3vh;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.textfield__container,
+.textfield__container__date {
+  width: 431px;
+  padding: 10px;
+}
+.Qheading {
+  padding-top: 18.6vh;
+  width: 519px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.datePicker {
+  width: 431px;
+  height: 33px;
+  background-color: #ffffff00;
+  background-color: red;
+  border: 1px solid black !important;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #fbbece;
+}
+
+.datePicker:hover {
+  background-color: #ffffff00;
+}
+.datePicker:focus {
+  background-color: #ffffff00;
+}
+.formbutton__container {
+  padding-top: 10vh;
+}
+.popup {
+  background-color: #fff;
+}
+.formbutton__container > button {
+  width: 316px;
+  height: 40px;
+  background: #c2478a;
+  border-radius: 30px;
+  font-size: 20px;
+  border: none;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.datePicker {
+  width: 431px;
+  height: 33px;
+  background-color: #ffffff00;
+  outline: none !important;
+  border: none !important;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #fbbece;
+}
+.datePicker:hover {
+  background-color: #ffffff00;
+}
+.datePicker:focus {
+  background-color: #ffffff00;
+}
+.formbutton__container > button {
+  width: 316px;
+  height: 40px;
+  background: #c2478a;
+  border-radius: 30px;
+  font-size: 20px;
+  border: none;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.date {
+  width: 431px;
+  background-color: #ffffff00;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  color: #fbbece;
+  font-size: 16px;
+
+  padding-bottom: 10px;
+  display: inline-block;
+  position: relative;
+}
+input::placeholder {
+  color: #fbbece;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+.textfield__container__date {
+  width: 431px;
+  padding: 0;
+  padding-top: 10px;
+
+  display: flex;
+  border-bottom: 1px solid #fbbece;
+}

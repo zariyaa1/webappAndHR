@@ -1,0 +1,50 @@
+.container {
+  background: linear-gradient(360deg, #b44486 27.4%, #352666 100%);
+  width: 82vw;
+  height: 100vh;
+}
+.mainContainer {
+  padding-left: 2.8%;
+  padding-right: 2.8%;
+  overflow-y: scroll;
+  height: 100%;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3%;
+}
+.headerLeft {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fbbece;
+}
+.headerRight {
+  display: flex;
+  justify-content: space-between;
+  /* width: 30%; */
+}
+
+.inputFirst {
+  width: 35vw;
+  height: 12vh;
+  border: none;
+  background: #fd939f;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 0.5px solid #c2478a;
+}
+
+.inputSecond {
+  width: 35vw;
+  height: 38vh;
+  background: #fd939f;
+  border: none;
+  border-radius: 0px 0px 10px 10px;
+}
+.boxLabel {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.36px;
+  color: #fd939f;
+  padding-bottom: 5%;
+}

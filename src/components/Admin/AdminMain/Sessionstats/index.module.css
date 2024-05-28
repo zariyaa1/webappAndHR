@@ -1,0 +1,139 @@
+.mainContainer {
+  width: 100%;
+  font-family: "Inter";
+  font-style: normal;
+
+  background: #ffffff;
+  border-radius: 10px;
+}
+.secondaryContainer {
+  padding: 22px 30px;
+  display: grid;
+  grid-template-columns: 45% 2% 53%;
+}
+.mainHeading {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.sessionContainer {
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.circularContainer {
+  width: 210px;
+  display: flex;
+  gap: 20px;
+}
+.text1 {
+  font-weight: 600;
+  font-size: 20px;
+  color: #141736;
+}
+.text2 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #b2b2b2;
+}
+.secondP {
+  position: relative;
+  top: -80px;
+  text-align: end;
+}
+.firstP {
+  padding-top: 20px;
+  text-align: start;
+}
+.subtext {
+  padding-top: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  color: #141736;
+}
+.subtext span {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  color: #b2b2b2;
+}
+.progDescCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.desc1 {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 30px;
+  color: #000000;
+}
+.desc2 {
+  font-weight: 400;
+  font-size: 16px;
+
+  color: #7c828a;
+}
+.sessionDivContainer {
+  display: flex;
+}
+.secondContainer {
+  position: relative;
+  left: -100px;
+  top: 180px;
+  width: 270px;
+  height: 0px;
+
+  border: 1px solid rgba(165, 180, 203, 0.3);
+  transform: rotate(-90deg);
+}
+.thirdContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.thirdContainer span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  text-align: center;
+  color: #000000;
+}
+.legendContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+.legendContentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.legendbox {
+  width: 10px;
+  height: 10px;
+}
+.ctm {
+  position: relative;
+  font-size: 12px;
+  top: 150px;
+  display: flex;
+  flex-direction: column;
+}
+.ctm span {
+  font-size: 12px;
+}

@@ -1,0 +1,39 @@
+.head1 {
+  color: "#2f2764";
+  font-size: 20px;
+  font-weight: 500;
+}
+.head2 {
+  color: #d47c9e;
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 18px;
+}
+.head3 {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #a8909d;
+  font-size: 14px;
+  font-weight: 400;
+  padding-bottom: 18px;
+  text-align: center;
+}
+.btn {
+  margin-top: 20px;
+  background-color: #2e2663;
+  border: none;
+  border-radius: 16px;
+  width: 200px;
+  height: 30px;
+  color: white;
+  font-size: 18px;
+}
+textarea {
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 20px;
+}
+.vdImg {
+  width: 100px;
+  height: 100px;
+}

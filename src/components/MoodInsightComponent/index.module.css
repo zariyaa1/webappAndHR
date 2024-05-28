@@ -1,0 +1,100 @@
+.mainContainer {
+  background: linear-gradient(180deg, #2f2564 0%, #c2478a 100%);
+  width: 82vw;
+  padding: 4.5vh;
+}
+.headingStats {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  padding-bottom: 3.5vh;
+  color: #fbbece;
+}
+.headingHistory {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  padding-bottom: 3.5vh;
+  color: #ffffff;
+}
+
+.scoreContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 32px;
+}
+.minidivs {
+  padding: 5px;
+}
+.scoreCard {
+  margin-right: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 14.4vh;
+  background: #f9ecfe;
+  border-radius: 20px;
+
+  padding: 10px;
+}
+.scoreCard > image {
+  width: 97px;
+  height: 85px;
+}
+.moodScoreHeading {
+  height: 19px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: rgba(0, 0, 0, 0.55);
+}
+.moodScoreHeading > span {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #c44fee;
+}
+.MoodcardContent {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #c44fee;
+}
+
+.sleepScoreHeading {
+  height: 19px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: rgba(0, 0, 0, 0.55);
+}
+.sleepScoreHeading > span {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #ff5d5d;
+}
+.SleepcardContent {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ff5d5d;
+}
+
+.moodCardContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 14px;
+}

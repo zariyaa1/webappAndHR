@@ -1,0 +1,35 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(360deg, #b44486 27.4%, #352666 100%);
+  padding-top: 10rem;
+  color: #ffffff;
+}
+.errorPara {
+  text-transform: uppercase;
+  color: #ff6972;
+  font-size: 1.5rem;
+}
+.errorCode {
+  word-break: break-all;
+  color: #ffffff;
+}
+.wrongPage {
+  width: fit-content;
+  text-align: center;
+  text-transform: capitalize;
+}
+.btnStyle {
+  padding: 0.625rem 1.25rem;
+  margin-top: 2.25rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
+}
+.unavailableText {
+  margin-top: 0.625rem;
+  text-align: center;
+}

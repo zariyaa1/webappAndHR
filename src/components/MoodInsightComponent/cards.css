@@ -1,0 +1,149 @@
+.grateful,
+.low,
+.content,
+.peaceful,
+.joyful,
+.excited,
+.relaxed,
+.unsure,
+.hurt,
+.anxious,
+.angry,
+.hopeless {
+  width: 10vw;
+  height: 100px;
+  height: 101px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-transform: capitalize;
+}
+
+.grateful > .descCont,
+.low > .descCont,
+.content > .descCont,
+.peaceful > .descCont,
+.joyful > .descCont,
+.excited > .descCont,
+.relaxed > .descCont,
+.unsure > .descCont,
+.hurt > .descCont,
+.anxious > .descCont >,
+.angry > .descCont,
+.hopeless > .descCont {
+  margin: 1.4vh;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.grateful > .descCont > h1,
+.low > .descCont > h1,
+.content > .descCont > h1,
+.peaceful > .descCont > h1,
+.joyful > .descCont > h1,
+.excited > .descCont > h1,
+.relaxed > .descCont > h1,
+.unsure > .descCont > h1,
+.hurt > .descCont > h1,
+.anxious > .descCont > h1,
+.angry > .descCont > h1,
+.hopeless > .descCont > h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+}
+.grateful > .descCont > p,
+.low > .descCont > p,
+.content > .descCont > p,
+.peaceful > .descCont > p,
+.joyful > .descCont > p,
+.excited > .descCont > p,
+.relaxed > .descCont > p,
+.unsure > .descCont > p,
+.hurt > .descCont > p,
+.anxious > .descCont > p,
+.angry > .descCont > p,
+.hopeless > .descCont > p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+}
+.grateful > .imageCont,
+.low > .imageCont,
+.content > .imageCont,
+.peaceful > .imageCont,
+.joyful > .imageCont,
+.excited > .imageCont,
+.relaxed > .imageCont,
+.unsure > .imageCont,
+.hurt > .imageCont,
+.anxious > .imageCont,
+.angry > .imageCont,
+.hopeless > .imageCont {
+  margin: 0.4vh;
+  width: 64px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.grateful {
+  background: #f9ecfe;
+  color: #ad08f4;
+}
+.grateful > .imageCont {
+  background-color: #edc9fa;
+}
+
+.unsure > .imageCont,
+.low > .imageCont,
+.hurt > .imageCont,
+.angry > .imageCont,
+.joyful > .imageCont,
+.anxious > .imageCont {
+  background: #ffd3c7;
+}
+
+.unsure,
+.low,
+.hurt,
+.angry,
+.joyful,
+.anxious {
+  background: #fef0ed;
+  color: #f13a0b;
+}
+
+.content,
+.peaceful,
+.excited {
+  background: #ecf9ef;
+  color: #12a914;
+}
+
+.content > .imageCont,
+.peaceful > .imageCont,
+.excited > .imageCont {
+  background-color: #c8f1d5;
+}
+
+.relaxed {
+  background: #f3f3f3;
+  color: #636363;
+}
+.relaxed > .imageCont {
+  background-color: #dcdcdc;
+}
+
+.hopeless {
+  background: #edf3fe;
+  color: #0b22f1;
+}
+.hopeless > .imageCont {
+  background-color: #cbc7ff;
+}
