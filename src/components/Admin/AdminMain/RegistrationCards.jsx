@@ -85,7 +85,7 @@ const RegistrationCards = ({ dated, state, userDistribution, SetuserDistribution
               <img src={divider} />
             </div>
             <div className={styles.CardLeftD}>
-              <span className={styles.mainHeadD}>Others</span>
+              <span className={styles.mainHeadD}>prefer not say</span>
               <span className={styles.mainCountD}>{odata} </span>
             </div>
           </div>

@@ -51,12 +51,16 @@ const SessionStats = ({
         setSessionRating(result);
 
 
+        console.log(result)
         // NEED TO REVISIT THE LOGIC
-        let sum = 0;
-        result.map((item, index) => {
-          sum += item.count;
-        });
-        setAverage((sum / 3).toFixed(2));
+        let TotalScore = 0;
+        let totalRating = 0
+        result.forEach(((item, index) => {
+          TotalScore += (item.count * item.rating);
+          totalRating += item.count;
+        }));;
+        console.log(TotalScore, totalRating)
+        setAverage((TotalScore / totalRating).toFixed(2));
       })
       .catch((err) => {
         console.log(err);
