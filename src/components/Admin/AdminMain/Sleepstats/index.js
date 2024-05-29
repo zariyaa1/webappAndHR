@@ -147,7 +147,7 @@ const SleepCards = ({
                       className={styles.graphCount}
                       style={{ color: getBarColor(item.sleepEmotion) }}
                     >
-                      <span>{item.count}%</span>
+                      <span>{item.percent.toFixed(2)}%</span>
                     </div>
                   ))}
                 </div>

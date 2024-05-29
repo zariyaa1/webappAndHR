@@ -133,12 +133,12 @@ const MoodCards = ({ dated, state, moodDistribution, SetmoodDistribution }) => {
                   </BarChart>
                 </div>
                 <div>
-                  {moodDistribution.moodDistribution?.map((item) => (
+                  {moodDistribution.distribution?.map((item) => (
                     <div
                       className={styles.graphCount}
                       style={{ color: getBarColor(item.mood) }}
                     >
-                      <span>{item.count}%</span>
+                      <span>{item.percent.toFixed(2)}%</span>
                     </div>
                   ))}
                 </div>

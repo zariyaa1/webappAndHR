@@ -11,7 +11,10 @@ import { AccountCircleRounded, Padding } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import AdminSurveyComp from "../Surveys";
-import { Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { DateRangeContext } from "../../../store/context";
+
+
 import * as XLSX from 'xlsx/xlsx.mjs';
 const buttonData = [
   {
@@ -33,6 +36,7 @@ const buttonData = [
     text: "CUSTOM",
   },
 ];
+
 
 const AdminNavbarComp = () => {
   const navigate = useNavigate();
@@ -56,13 +60,7 @@ const AdminNavbarComp = () => {
   // TODO: Remove date state fromDate and endDate is need . date does not need it.
   // need to change the structure of the state here 
   const [date, setDate] = useState();
-  const [state, setState] = useState([
-    {
-      startDate: null,
-      endDate: null,
-      key: "selection",
-    },
-  ]);
+  const [state, setState] = useContext(DateRangeContext);
 
 
   const [classname, setClassname] = useState(new Array(5).fill(""));

@@ -44,7 +44,7 @@ const btn_grp = [
   },
   {
     name: " Healing Tools",
-    id: "62e20ff24c17eb298fa6e1d9 ",
+    id: "62e20ff24c17eb298fa6e1d9",
   },
 ];
 
@@ -111,7 +111,7 @@ const data = [
   },
 ];
 
-const AdminSurveyComp = () => {
+const AdminSurveyComp = ({ state }) => {
   const [value, setValue] = React.useState("1");
   const [value2, setValue2] = React.useState("a");
   const [tabdata1, setTabdata1] = useState("");
@@ -124,6 +124,7 @@ const AdminSurveyComp = () => {
   const [graphData, setGraphData] = useState();
   const [classname, setClassname] = useState(new Array(4).fill(""));
 
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -132,11 +133,19 @@ const AdminSurveyComp = () => {
     setValue2(newValue);
   };
 
+
+  /***
+   * tabdata1 is for dailies in top5 content based on mins component
+   */
   useEffect(() => {
+
+    // TODO : need to make date dynamic
     let v = {
       query: "number_of_contents_watched",
-      year: "2023",
+      year: "2024",
     };
+
+
     getDashboardData(v)
       .then((res) => {
         setGraphData(modifyData(res?.data?.monthwiseData));
@@ -160,7 +169,7 @@ const AdminSurveyComp = () => {
               setCategoryCounts((prevCounts) => {
                 // Ensure prevCounts is initialized as an empty array if undefined
                 const counts = Array.isArray(prevCounts) ? prevCounts : [];
-                return [...counts, count?.data?.count];
+                return [...counts, { _id: val.categoryId, count: count?.data?.count }];
               });
             })
             .catch((error) => {
@@ -187,7 +196,7 @@ const AdminSurveyComp = () => {
               setCategoryCounts2((prevCounts) => {
                 // Ensure prevCounts is initialized as an empty array if undefined
                 const counts = Array.isArray(prevCounts) ? prevCounts : [];
-                return [...counts, count?.data?.count];
+                return [...counts, { _id: val.categoryId, count: count?.data?.count }];
               });
             })
             .catch((error) => {
@@ -213,8 +222,9 @@ const AdminSurveyComp = () => {
             .then((count) => {
               setCategoryCounts3((prevCounts) => {
                 // Ensure prevCounts is initialized as an empty array if undefined
+
                 const counts = Array.isArray(prevCounts) ? prevCounts : [];
-                return [...counts, count?.data?.count];
+                return [...counts, { _id: val.categoryId, count: count?.data?.count }];
               });
             })
             .catch((error) => {
@@ -281,7 +291,7 @@ const AdminSurveyComp = () => {
     if (!id) {
       let v = {
         query: "number_of_contents_watched",
-        year: "2023",
+        year: "2024",
       };
       getDashboardData(v)
         .then((res) => {
@@ -293,8 +303,8 @@ const AdminSurveyComp = () => {
     } else {
       let v = {
         query: "number_of_contents_watched",
-        year: "2023",
-        categoryId: id,
+        year: "2024",
+        masterCategoryId: id,
       };
       getDashboardData(v)
         .then((res) => {
@@ -309,251 +319,305 @@ const AdminSurveyComp = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.secondaryContainer}>
-        <div className={styles.miniContainer}>
-          <div className={styles.CardContainer}>
-            <div className={styles.headingContainer}>
-              <span className={styles.heading}>Total Content Watched</span>
-              <span className={styles.description}>
-                Content Watched Overview
-              </span>
-            </div>
-            <div className={styles.menuContainer}>|</div>
-          </div>
-          <div className={styles.contentContainer}>
-            <div className={styles.buttonGroup}>
-              {btn_grp.map((item, index) => (
-                <div
-                  className={
-                    !classname[index]
-                      ? styles.indbutton
-                      : styles.indbutton_active
-                  }
-                  key={index}
-                  onClick={(e) => handleDivChange(item.id, index)}
-                >
-                  Total <span className={styles.btnhelper}>{item.name} </span>{" "}
-                  watched
-                </div>
-              ))}
-            </div>
-            <div className={styles.graphContainer}>
-              <BarChart data={graphData} width={500} height={350}>
-                <CartesianGrid stroke="#f5f5f5" />
-                <YAxis type="number" dataKey="count" />
-                <XAxis dataKey="month" type="category" />
-                <Tooltip />
-                <Bar
-                  dataKey="count"
-                  fill="#00a0fc"
-                  stroke="#000000"
-                  strokeWidth={1}
-                >
-                  {graphData?.map((entry, index) => (
-                    <Cell key={`cell-${index}`} strokeWidth={0} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </div>
-          </div>
-        </div>{" "}
-        <div className={styles.miniContainer}>
-          <div className={styles.CardContainer}>
-            <div className={styles.headingContainer}>
-              <span className={styles.heading}>Top 5 Content</span>
-              <span className={styles.description}>
-                Based on Number of Minutes Watched
-              </span>
-            </div>
-            <div className={styles.menuContainer}>|</div>
-          </div>
-          <div className={styles.contentContainer}>
-            <div className={styles.tabContainer}>
-              <TabContext value={value} variant="fullwidth">
-                <div className={styles.tabholder}>
-                  <TabList
-                    variant="fullwidth"
-                    onChange={handleChange}
-                    aria-label="lab API tabs example"
-                    centered
-                  >
-                    <Tab label="Dailies" value="1" sx={{ width: "33.33%" }} />
-                    <Tab label="Courses" value="2" sx={{ width: "33.33%" }} />
-                    <Tab label="Healing" value="3" sx={{ width: "33.33%" }} />
-                  </TabList>
-                </div>
-                {tabdata1 && (
-                  <TabPanel value="1">
-                    {tabdata1.map((data, index) => (
-                      <Accordion
-                        onChange={() => handleaccordionClick1(data._id)}
-                      >
-                        <AccordionSummary
-                          expandIcon={<ArrowDropDownIcon />}
-                          aria-controls="panel2-content"
-                          id="panel2-header"
-                        >
-                          <Typography> {data.name}</Typography>
-                        </AccordionSummary>
-                        {accdata &&
-                          accdata.map((item, index) => (
-                            <AccordionDetails>
-                              <div className={styles.accdetails}>
-                                <span className={styles.acctext}>
-                                  {item?.content?.title}
-                                </span>
-                                <span className={styles.accvalue}>
-                                  {" "}
-                                  {item?.minsWatched} minutes
-                                </span>
-                              </div>
-                            </AccordionDetails>
-                          ))}
-                      </Accordion>
-                    ))}
-                  </TabPanel>
-                )}{" "}
-                {tabdata2 && (
-                  <TabPanel value="2">
-                    {tabdata2.map((data, index) => (
-                      <Accordion
-                        onChange={() => handleaccordionClick1(data._id)}
-                      >
-                        <AccordionSummary
-                          expandIcon={<ArrowDropDownIcon />}
-                          aria-controls="panel2-content"
-                          id="panel2-header"
-                        >
-                          <Typography> {data.name}</Typography>
-                        </AccordionSummary>
-                        {accdata &&
-                          accdata.map((item, index) => (
-                            <AccordionDetails>
-                              <div className={styles.accdetails}>
-                                <span className={styles.acctext}>
-                                  {item?.content?.title}
-                                </span>
-                                <span className={styles.accvalue}>
-                                  {" "}
-                                  {item?.minsWatched} minutes
-                                </span>
-                              </div>
-                            </AccordionDetails>
-                          ))}
-                      </Accordion>
-                    ))}
-                  </TabPanel>
-                )}{" "}
-                {tabdata3 && (
-                  <TabPanel value="3">
-                    {tabdata3.map((data, index) => (
-                      <Accordion
-                        onChange={() => handleaccordionClick1(data._id)}
-                      >
-                        <AccordionSummary
-                          expandIcon={<ArrowDropDownIcon />}
-                          aria-controls="panel2-content"
-                          id="panel2-header"
-                        >
-                          <Typography> {data.name}</Typography>
-                        </AccordionSummary>
-                        {accdata &&
-                          accdata.map((item, index) => (
-                            <AccordionDetails>
-                              <div className={styles.accdetails}>
-                                <span className={styles.acctext}>
-                                  {item?.content?.title}
-                                </span>
-                                <span className={styles.accvalue}>
-                                  {" "}
-                                  {item?.minsWatched} minutes
-                                </span>
-                              </div>
-                            </AccordionDetails>
-                          ))}
-                      </Accordion>
-                    ))}
-                  </TabPanel>
-                )}
-              </TabContext>
-            </div>
-          </div>
-        </div>{" "}
-        <div className={styles.miniContainer}>
-          <div className={styles.CardContainer}>
-            <div className={styles.headingContainer}>
-              <span className={styles.heading}>Top 5 Content</span>
-              <span className={styles.description}>
-                Based on Number of Minutes Watched
-              </span>
-            </div>
-            <div className={styles.menuContainer}>|</div>
-          </div>
-          <div className={styles.contentContainer}>
-            <div className={styles.tabContainer}>
-              <TabContext value={value2} variant="fullwidth">
-                <div className={styles.tabholder}>
-                  <TabList
-                    variant="fullwidth"
-                    onChange={handleChange2}
-                    centered
-                  >
-                    <Tab label="Dailies" value="a" sx={{ width: "33.33%" }} />
-                    <Tab label="Courses" value="b" sx={{ width: "33.33%" }} />
-                    <Tab label="Healing" value="c" sx={{ width: "33.33%" }} />
-                  </TabList>
-                </div>
-                <TabPanel value="a">
-                  <div className={styles.Tcontainer}>
-                    {tabdata1 &&
-                      tabdata1.map((item, index) => (
-                        <div className={styles.Tcontent}>
-                          <img src={data?.[index]?.img} />
-                          <span className={styles.acctext}>{item.name}</span>
-                          <span className={styles.accvalue}>
-                            {categoryCounts?.[index]} views
-                          </span>
-                        </div>
-                      ))}
-                  </div>
-                </TabPanel>
-                <TabPanel value="b">
-                  {" "}
-                  <div className={styles.Tcontainer}>
-                    {tabdata2 &&
-                      tabdata2.map((item, index) => (
-                        <div className={styles.Tcontent}>
-                          <img src={data?.[index]?.img} />
-                          <span className={styles.acctext}>{item.name}</span>
-                          <span className={styles.accvalue}>
-                            {" "}
-                            {categoryCounts2?.[index]} views
-                          </span>
-                        </div>
-                      ))}
-                  </div>{" "}
-                </TabPanel>
-                <TabPanel value="c">
-                  {" "}
-                  <div className={styles.Tcontainer}>
-                    {tabdata3 &&
-                      tabdata3.map((item, index) => (
-                        <div className={styles.Tcontent}>
-                          <img src={data?.[index]?.img} />
-                          <span className={styles.acctext}>{item.name}</span>
-                          <span className={styles.accvalue}>
-                            {categoryCounts3?.[index]} views
-                          </span>
-                        </div>
-                      ))}
-                  </div>{" "}
-                </TabPanel>
-              </TabContext>
-            </div>
-          </div>
-        </div>{" "}
+        <TotalContentWatchedComponent
+          classname={classname}
+          graphData={graphData}
+          handleDivChange={handleDivChange}
+        />
+
+        <TopFiveContentBasedOnMinutes
+          value={value}
+          handleChange={handleChange}
+          tabdata1={tabdata1}
+          handleaccordionClick1={handleaccordionClick1}
+          accdata={accdata}
+          tabdata2={tabdata2}
+          tabdata3={tabdata3}
+
+        />
+
+        <TopFiveContentBasedOnView
+          value2={value2}
+          handleChange2={handleChange2}
+          tabdata1={tabdata1}
+          tabdata2={tabdata2}
+          categoryCounts={categoryCounts}
+          categoryCounts3={categoryCounts3}
+          categoryCounts2={categoryCounts2}
+          tabdata3={tabdata3}
+        />
       </div>
     </div>
   );
 };
 
 export default AdminSurveyComp;
+
+
+
+const TopFiveContentBasedOnMinutes = ({ value,
+  handleChange,
+  tabdata1,
+  handleaccordionClick1,
+  accdata,
+  tabdata2,
+  tabdata3 }
+) => {
+
+
+  return (<>
+
+    <div className={styles.miniContainer}>
+      <div className={styles.CardContainer}>
+        <div className={styles.headingContainer}>
+          <span className={styles.heading}>Top 5 Content</span>
+          <span className={styles.description}>
+            Based on Number of Minutes Watched
+          </span>
+        </div>
+      </div>
+      <div className={styles.contentContainer}>
+        <div className={styles.tabContainer}>
+          <TabContext value={value} variant="fullwidth">
+
+
+            {/* value is for course 1 , dailies 2, healing tools 3 */}
+            <div className={styles.tabholder}>
+              <TabList
+                variant="fullwidth"
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+                centered
+              >
+                <Tab label="Dailies" value="1" sx={{ width: "33.33%" }} />
+                <Tab label="Courses" value="2" sx={{ width: "33.33%" }} />
+                <Tab label="Healing" value="3" sx={{ width: "33.33%" }} />
+              </TabList>
+            </div>
+            {tabdata1 && (
+
+              <TabPanel value="1">
+                {tabdata1.map((data, index) => (
+                  <ModifiedAccordian data={data} handleaccordionClick1={handleaccordionClick1} accdata={accdata} />
+                ))}
+              </TabPanel>
+            )}{" "}
+            {tabdata2 && (
+              <TabPanel value="2">
+                {tabdata2.map((data, index) => (
+                  <ModifiedAccordian data={data} handleaccordionClick1={handleaccordionClick1} accdata={accdata} />
+                ))}
+              </TabPanel>
+            )}{" "}
+            {tabdata3 && (
+              <TabPanel value="3">
+                {tabdata3.map((data, index) => (
+                  <ModifiedAccordian data={data} handleaccordionClick1={handleaccordionClick1} accdata={accdata} />
+                ))}
+              </TabPanel>
+            )}
+          </TabContext>
+        </div>
+      </div>
+    </div>{" "}
+  </>)
+}
+
+
+const TopFiveContentBasedOnView = ({
+  value2,
+  handleChange2,
+  tabdata1,
+  tabdata2,
+  categoryCounts,
+  categoryCounts3,
+  categoryCounts2,
+  tabdata3
+}
+) => {
+
+
+  return (<>
+
+    <div className={styles.miniContainer}>
+      <div className={styles.CardContainer}>
+        <div className={styles.headingContainer}>
+          <span className={styles.heading}>Top 5 Content</span>
+          <span className={styles.description}>
+            Based on Number of  view
+          </span>
+        </div>
+      </div>
+      <div className={styles.contentContainer}>
+        <div className={styles.tabContainer}>
+          <TabContext value={value2} variant="fullwidth">
+            <div className={styles.tabholder}>
+              <TabList
+                variant="fullwidth"
+                onChange={handleChange2}
+                centered
+              >
+                <Tab label="Dailies" value="a" sx={{ width: "33.33%" }} />
+                <Tab label="Courses" value="b" sx={{ width: "33.33%" }} />
+                <Tab label="Healing" value="c" sx={{ width: "33.33%" }} />
+              </TabList>
+            </div>
+            <TabPanel value="a">
+              <div className={styles.Tcontainer}>
+                {tabdata1 &&
+                  tabdata1.map((item, index) => (
+                    <div className={styles.Tcontent}>
+                      <img src={data?.[index]?.img} />
+                      <span className={styles.acctext}>{item.name}</span>
+                      <span className={styles.accvalue}>
+                        {categoryCounts.filter((objectWithViewsAndCategoryId) => { return objectWithViewsAndCategoryId._id === item._id })[0]?.count || 0} views
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            </TabPanel>
+            <TabPanel value="b">
+              <div className={styles.Tcontainer}>
+                {tabdata2 &&
+                  tabdata2.map((item, index) => (
+                    <div className={styles.Tcontent}>
+                      <img src={data?.[index]?.img} />
+                      <span className={styles.acctext}>{item.name}</span>
+                      <span className={styles.accvalue}>
+                        {categoryCounts2.filter((objectWithViewsAndCategoryId) => { return objectWithViewsAndCategoryId._id === item._id })[0]?.count || 0} views
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            </TabPanel>
+            <TabPanel value="c">
+              <div className={styles.Tcontainer}>
+                {tabdata3 &&
+                  tabdata3.map((item, index) => (
+                    <div className={styles.Tcontent}>
+                      {/* {categoryCounts3.filter((viewWithCategoryId) => viewWithCategoryId._id === item._id)} */}
+                      {console.log('doc',)}
+                      <img src={data?.[index]?.img} />
+                      <span className={styles.acctext}>{item.name}</span>
+                      <span className={styles.accvalue}>
+                        {categoryCounts3.filter((objectWithViewsAndCategoryId) => { return objectWithViewsAndCategoryId._id === item._id })[0]?.count || 0} views
+                      </span>
+                    </div>
+                  ))}
+              </div>{" "}
+            </TabPanel>
+          </TabContext>
+        </div>
+      </div>
+    </div>{" "}
+  </>)
+}
+const TotalContentWatchedComponent = ({
+  classname,
+  graphData,
+  handleDivChange
+}) => {
+
+  return (<>
+
+    <div className={styles.miniContainer}>
+      <div className={styles.CardContainer}>
+        <div className={styles.headingContainer}>
+          <span className={styles.heading}>Total Content Watched</span>
+          <span className={styles.description}>
+            Content Watched Overview
+          </span>
+        </div>
+
+      </div>
+      <div className={styles.contentContainer}>
+        <div className={styles.buttonGroup}>
+          {btn_grp.map((item, index) => (
+            <div
+              className={
+                !classname[index]
+                  ? styles.indbutton
+                  : styles.indbutton_active
+              }
+              key={index}
+              onClick={(e) => handleDivChange(item.id, index)}
+            >
+              Total <span className={styles.btnhelper}>{item.name} </span>{" "}
+              watched
+            </div>
+          ))}
+        </div>
+        <div className={styles.graphContainer}>
+          <BarChart data={graphData} width={500} height={350}>
+            <CartesianGrid stroke="#f5f5f5" />
+            <YAxis type="number" dataKey="count" />
+            <XAxis dataKey="month" type="category" />
+            <Tooltip />
+            <Bar
+              dataKey="count"
+              fill="#00a0fc"
+              stroke="#000000"
+              strokeWidth={1}
+            >
+              {graphData?.map((entry, index) => (
+                <Cell key={`cell-${index}`} strokeWidth={0} />
+              ))}
+            </Bar>
+          </BarChart>
+        </div>
+      </div>
+    </div>{" "}
+  </>)
+}
+
+
+
+const ModifiedAccordian = ({ data }) => {
+
+  const [accdata, setAccdata] = useState("");
+
+  const handleaccordionClick1 = async (e) => {
+    const data = {
+      query: "top_n_content",
+      categoryId: e,
+    };
+
+    try {
+
+      let res = await getDashboardData(data)
+      setAccdata(res?.data?.data);
+    } catch (err) {
+      console.log('something went wrong while fetching minutes viewed ')
+    }
+
+  };
+
+
+  return (<>
+
+    <Accordion
+      onChange={() => handleaccordionClick1(data._id)}
+    >
+      <AccordionSummary
+        expandIcon={<ArrowDropDownIcon />}
+        aria-controls="panel2-content"
+        id="panel2-header"
+      >
+        <Typography> {data.name}</Typography>
+      </AccordionSummary>
+      {accdata ? accdata.length > 0 ? accdata.map((item, index) => (
+        <AccordionDetails>
+          <div className={styles.accdetails}>
+            <span className={styles.acctext}>
+              {item?.content?.title}
+            </span>
+            <span className={styles.accvalue}>
+              {item?.minsWatched} minutes
+            </span>
+          </div>
+        </AccordionDetails>
+      )) : <AccordionDetails>  no content watched</AccordionDetails> : <AccordionDetails>  loading</AccordionDetails>
+      }
+    </Accordion>
+  </>)
+}

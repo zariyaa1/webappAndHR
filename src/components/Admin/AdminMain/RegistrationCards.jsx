@@ -50,7 +50,7 @@ const RegistrationCards = ({ dated, state, userDistribution, SetuserDistribution
       {userDistribution && (
         <>
           <div className={styles.registrationCard}>
-            <span className={styles.mainHead}>Total Registration</span>
+            <span className={styles.mainHead}>Total App Registration</span>
             <div className={styles.CardLeft}>
               <span className={styles.mainCount}>
                 {userDistribution?.totalRegistration}
@@ -60,7 +60,7 @@ const RegistrationCards = ({ dated, state, userDistribution, SetuserDistribution
             </div>
           </div>{" "}
           <div className={styles.registrationCard}>
-            <span className={styles.mainHead}>New Registration</span>
+            <span className={styles.mainHead}>New App Registration</span>
             <div className={styles.CardLeft}>
               <span className={styles.mainCount}>
                 {userDistribution?.newRegistrationBasedOnDate}
@@ -85,7 +85,7 @@ const RegistrationCards = ({ dated, state, userDistribution, SetuserDistribution
               <img src={divider} />
             </div>
             <div className={styles.CardLeftD}>
-              <span className={styles.mainHeadD}>prefer not say</span>
+              <span className={styles.mainHeadD}>not said</span>
               <span className={styles.mainCountD}>{odata} </span>
             </div>
           </div>

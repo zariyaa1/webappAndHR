@@ -187,7 +187,7 @@ const SessionDistribution = ({ sessiondata }) => {
               }}
             >
               <span className={styles.regcardCircBar}>
-                {sessiondata?.family}%
+                {sessiondata?.family}
               </span>
             </Box>
           </Box>
@@ -225,7 +225,7 @@ const SessionDistribution = ({ sessiondata }) => {
               }}
             >
               <span className={styles.regcardCircBar}>
-                {sessiondata?.self}%
+                {sessiondata?.self}
               </span>
             </Box>
           </Box>

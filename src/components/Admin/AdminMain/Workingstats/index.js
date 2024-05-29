@@ -122,7 +122,7 @@ const WorkingStatComponent = ({ item, getColor, index, getheightvalue, }) => {
               className={styles.graphCount}
               style={{ color: `${getColor(index)}` }}
             >
-              <span>{Math.floor(item?.percentage)}%</span>
+              <span>{item?.percentage.toFixed(2)}%</span>
             </div>
           ))}
         </div>
