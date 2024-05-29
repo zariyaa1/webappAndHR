@@ -194,7 +194,6 @@ const AdminNavbarComp = () => {
       <div className={styles.Scont}>
         {!check && (
           <>
-            {" "}
             <AdminMainComp
 
               userDistribution={userDistribution}

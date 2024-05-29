@@ -64,69 +64,17 @@ const MainIssueComponent = ({ issueData, selectdiv }) => {
     <div className={styles.disordersContainer}>
       {issueData &&
         issueData?.map((item, index) => (
-          <div
-            key={index}
-            className={styles.disorder}
-            onClick={() => selectdiv(index)}
-          >
-            <div>
-              <img src={item.image} className={styles.disorderImage} />
-            </div>
-            <div className={styles.disorderName}>{item.question}</div>
-            <div className={styles.disorderProgress}>
-              <Box sx={{ position: "relative", display: "inline-flex" }}>
-                <CircularProgress
-                  variant="determinate"
-                  size="51px"
-                  value={100}
-                  sx={{ color: "#D8D8D8", position: "absolute", left: 0 }}
-                />
-                <CircularProgress
-                  variant="determinate"
-                  value={item.percentage < 1 ? 0 : item.percentage}
-                  size="51px"
-                />
-                <Box
-                  sx={{
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    position: "absolute",
-                    display: "flex",
+          <>
 
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span className={styles.regcardCircBar}>
-                    {item.percentage < 1 ? 0 : item.percentage}
-                  </span>
-                </Box>
-              </Box>
-            </div>
-          </div>
-        ))}
-    </div>
-  </>)
-}
-
-const SubISSUEComponent = ({ name, data, image }) => {
-
-  return (<>
-
-    <div className={styles.issueContainer}>
-      <span className={styles.mainHead}>Issues Stats</span>
-      <div className={styles.disordersContainer}>
-        <div className={styles.secCont}>
-          <img src={image} className={styles.disorderImage} />
-          <span>{name}</span>
-        </div>
-
-        {data &&
-          data.map((item, index) => (
-            <div key={index} className={styles.disorderSec}>
-              <div className={styles.disorderNameSec}>{item.subissue}</div>
+            {item.percentage != 0 && <div
+              key={index}
+              className={styles.disorder}
+              onClick={() => selectdiv(index)}
+            >
+              <div>
+                <img src={item.image} className={styles.disorderImage} />
+              </div>
+              <div className={styles.disorderName}>   <a className={styles.removeUnderline} href="#subIssue"> {item.question}</a> </div>
               <div className={styles.disorderProgress}>
                 <Box sx={{ position: "relative", display: "inline-flex" }}>
                   <CircularProgress
@@ -137,7 +85,7 @@ const SubISSUEComponent = ({ name, data, image }) => {
                   />
                   <CircularProgress
                     variant="determinate"
-                    value={item.percentage}
+                    value={item.percentage < 1 ? 0 : item.percentage}
                     size="51px"
                   />
                   <Box
@@ -154,12 +102,72 @@ const SubISSUEComponent = ({ name, data, image }) => {
                     }}
                   >
                     <span className={styles.regcardCircBar}>
-                      {item.percentage}
+                      {item.percentage < 1 ? 0 : item.percentage}
                     </span>
                   </Box>
                 </Box>
               </div>
-            </div>
+            </div>}
+          </>
+        ))}
+    </div>
+  </>)
+}
+
+const SubISSUEComponent = ({ name, data, image }) => {
+
+  return (<>
+
+    <div className={styles.issueContainer} id="subIssue">
+      <span className={styles.mainHead}>Issues Stats</span>
+      <div className={styles.disordersContainer}>
+        <div className={styles.secCont}>
+          <img src={image} className={styles.disorderImage} />
+          <span>{name}</span>
+        </div>
+
+        {data &&
+          data.map((item, index) => (
+
+            <>
+
+              {item.percentage != 0 && <div key={index} className={styles.disorderSec}>
+                <div className={styles.disorderNameSec}>{item.subissue}</div>
+                <div className={styles.disorderProgress}>
+                  <Box sx={{ position: "relative", display: "inline-flex" }}>
+                    <CircularProgress
+                      variant="determinate"
+                      size="51px"
+                      value={100}
+                      sx={{ color: "#D8D8D8", position: "absolute", left: 0 }}
+                    />
+                    <CircularProgress
+                      variant="determinate"
+                      value={item.percentage}
+                      size="51px"
+                    />
+                    <Box
+                      sx={{
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        position: "absolute",
+                        display: "flex",
+
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <span className={styles.regcardCircBar}>
+                        {item.percentage}
+                      </span>
+                    </Box>
+                  </Box>
+                </div>
+              </div>}
+            </>
+
           ))}
       </div>
     </div>
