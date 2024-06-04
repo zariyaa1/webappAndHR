@@ -134,8 +134,8 @@ const AdminNavbarComp = () => {
           endDate = currentDate;
         } else if (index === 2) {
           // Last month
-          startDate = new Date(currentDate.getTime() - 29 * 24 * 60 * 60 * 1000);
-          endDate = currentDate;
+          startDate = getPreviousMonthStart(currentDate)
+          endDate = getMonthEnd(currentDate);
         } else if (index === 3) {
           // Last quarter (90 days)
           startDate = new Date(currentDate.getTime() - 89 * 24 * 60 * 60 * 1000);
@@ -585,3 +585,16 @@ const GenerateXLSXFile = (startDate, endDate, Data) => {
   XLSX.writeFile(workbook, `zariyaaAnalytics ${startDate}-${endDate}.xlsx`);
 }
 export default AdminNavbarComp;
+
+
+function getPreviousMonthStart(currentDate) {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  return new Date(year, month - 2, 1);
+}
+
+function getMonthEnd(currentDate) {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  return new Date(year, month - 1, 0);
+}
