@@ -130,8 +130,8 @@ const AdminNavbarComp = () => {
 
         if (index === 1) {
           // Last week
-          startDate = new Date(currentDate.getTime() - 6 * 24 * 60 * 60 * 1000);
-          endDate = currentDate;
+          startDate = getPreviousWeekStart(currentDate);
+          endDate = getPreviousWeekEnd(currentDate);
         } else if (index === 2) {
           // Last month
           startDate = getPreviousMonthStart(currentDate)
@@ -142,8 +142,8 @@ const AdminNavbarComp = () => {
           endDate = currentDate;
         } else if (index === 4) {
           // Last year (180 days)
-          startDate = new Date(currentDate.getTime() - 364 * 24 * 60 * 60 * 1000);
-          endDate = currentDate;
+          startDate = getlastYearEnd(currentDate)
+          endDate = getLastYearStart(currentDate);
         }
 
         const formattedStartDate = formatDate(endDate);
@@ -597,4 +597,35 @@ function getMonthEnd(currentDate) {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   return new Date(year, month - 1, 0);
+}
+
+function getPreviousWeekEnd(currentDate) {
+
+  let dayOFWeek = currentDate.getDay();
+  // 0 is sunday that why 1 is added
+  return new Date(currentDate.getTime() - (dayOFWeek + 1) * 24 * 60 * 60 * 1000)
+}
+
+function getPreviousWeekStart(currentDate) {
+
+  let dayOFWeek = currentDate.getDay();
+
+  // 0 is sunday that why 7 is added
+  return new Date(currentDate.getTime() - (dayOFWeek + 7) * 24 * 60 * 60 * 1000)
+}
+
+
+function getLastYearStart(currentDate) {
+
+  let currentYear = currentDate.getFullYear()
+  return new Date(currentYear - 1, 11, 31);
+
+
+}
+
+function getlastYearEnd(currentDate) {
+
+  let currentYear = currentDate.getFullYear()
+  return new Date(currentYear - 1, 0, 1);
+
 }
