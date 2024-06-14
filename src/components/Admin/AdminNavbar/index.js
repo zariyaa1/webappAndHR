@@ -13,7 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import AdminSurveyComp from "../Surveys";
 import { useContext } from "react";
 import { DateRangeContext } from "../../../store/context";
-
+import { getReportAPICALL } from "../../../services/Reports"
 
 import * as XLSX from 'xlsx/xlsx.mjs';
 const buttonData = [
@@ -85,24 +85,24 @@ const AdminNavbarComp = () => {
   const [sessionStats, setSessionStat] = useState(null);
   const [sessionRating, setSessionRating] = useState(null);
 
-
-  const handleReportDownload = () => {
-    const data = {
-      usersDistribution: userDistribution,
-      usersMoodDistribution: moodDistribution,
-      userSleepDistribution: sleepDistribution,
-      usersIssueDistribution: issueDistribution,
-      userPreferenceDistribution: preferenceDistribution,
-      userReviews: Reviews,
-      usersSessionRating: sessionRating,
-      userSessionStats: sessionStats,
-    }
-
-
-    GenerateXLSXFile(state[0].startDate || 'alltime', state[0].endDate || 'alltime', data)
+  // excel report
+  // const handleReportDownload = () => {
+  //   const data = {
+  //     usersDistribution: userDistribution,
+  //     usersMoodDistribution: moodDistribution,
+  //     userSleepDistribution: sleepDistribution,
+  //     usersIssueDistribution: issueDistribution,
+  //     userPreferenceDistribution: preferenceDistribution,
+  //     userReviews: Reviews,
+  //     usersSessionRating: sessionRating,
+  //     userSessionStats: sessionStats,
+  //   }
 
 
-  }
+  //   GenerateXLSXFile(state[0].startDate || 'alltime', state[0].endDate || 'alltime', data)
+
+
+  // }
 
 
 
@@ -165,6 +165,33 @@ const AdminNavbarComp = () => {
     setOpen(false);
   };
 
+
+  const handleReportDownload = async () => {
+
+
+    try {
+      const blobData = await getReportAPICALL();
+
+
+      const blob = new Blob([blobData], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'report.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Clean up the URL object
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      alert('Error downloading PDF. Please try again.');
+    }
+
+  }
   return (
     <>
       <div className={styles.mainContainer}>
@@ -404,186 +431,187 @@ const DisplayDateRange = ({ startDate, endDate }) => {
 };
 
 
-const GenerateXLSXFile = (startDate, endDate, Data) => {
+// Excel
+// const GenerateXLSXFile = (startDate, endDate, Data) => {
 
 
-  // DATA have to be in array of array
-  const { usersDistribution,
-    usersMoodDistribution,
-    userSleepDistribution,
-    usersIssueDistribution,
-    userPreferenceDistribution,
-    userReviews,
-    usersSessionRating,
-    userSessionStats
-  } = Data;
+//   // DATA have to be in array of array
+//   const { usersDistribution,
+//     usersMoodDistribution,
+//     userSleepDistribution,
+//     usersIssueDistribution,
+//     userPreferenceDistribution,
+//     userReviews,
+//     usersSessionRating,
+//     userSessionStats
+//   } = Data;
 
 
-  /**
-   * analytics computation part
-   *  
-   * */
+//   /**
+//    * analytics computation part
+//    *  
+//    * */
 
-  let maleCount = 0;
-  let femaleCount = 0;
-  let othersCount = 0
-
-
-  usersDistribution.maleAndFemaleDistribution.forEach(element => {
-
-    // need to change it after changing in the data base
-    if (element.gender === "Male") {
-      maleCount += element.count
-    } else if (element.gender === "Female") {
-      femaleCount += element.count;
-    } else {
-      othersCount += element.count;
-    }
-
-  });
+//   let maleCount = 0;
+//   let femaleCount = 0;
+//   let othersCount = 0
 
 
-  let UserDistributioinObject = {
-    startDate: startDate,
-    endDate: endDate,
-    totalFamilyMembers: usersDistribution.TotalFamilyMembers,
-    newFamilyMembersBetweenRange: usersDistribution.newFamilyMembersBasedOnDate,
-    newUserBetweenRange: usersDistribution.newRegistrationBasedOnDate,
-    totalUsers: usersDistribution.totalRegistration,
-    maleCount: maleCount,
-    femaleCount: femaleCount,
-    othersCount: othersCount
-  }
+//   usersDistribution.maleAndFemaleDistribution.forEach(element => {
+
+//     // need to change it after changing in the data base
+//     if (element.gender === "Male") {
+//       maleCount += element.count
+//     } else if (element.gender === "Female") {
+//       femaleCount += element.count;
+//     } else {
+//       othersCount += element.count;
+//     }
+
+//   });
 
 
-
-  // question , answer ,  count , percentage
-  let preferenceDistributionArray = [];
-
-
-  userPreferenceDistribution.forEach((questionAndanswer) => {
-
-
-    questionAndanswer.answers.forEach((answerItem) => {
-
-      let preferenceDistributionObject = {
-        startDate: startDate,
-        endDate: endDate,
-        question: questionAndanswer.question,
-        answer: answerItem.answer,
-        count: answerItem.count,
-        percentage: answerItem.percentage,
-      }
-      preferenceDistributionArray.push(preferenceDistributionObject)
-    })
-
-    preferenceDistributionArray.push({
-      startDate: "",
-      endDate: "",
-      question: "",
-      answer: "",
-      count: "",
-      percentage: ""
-    })
-
-  })
-
-
-  // main issues  , percentage,  subissue percentage
-  let issueDistributionArray = [];
-
-  usersIssueDistribution.forEach((MainIssueAndSubIssues) => {
-
-
-    MainIssueAndSubIssues.subissues.forEach((subissueItem) => {
-
-      let issueDistributionObject = {
-        startDate: startDate,
-        endDate: endDate,
-        mainIssue: MainIssueAndSubIssues.question,
-        MainIssuepercentage: MainIssueAndSubIssues.percentage,
-        subIssue: subissueItem.subissue,
-        SubIssuePercentage: subissueItem.percentage
-      }
-      issueDistributionArray.push(issueDistributionObject)
-    })
-    issueDistributionArray.push({
-      startDate: "",
-      endDate: "",
-      mainIssue: "",
-      MainIssuepercentage: "",
-      subIssue: "",
-      SubIssuePercentage: ""
-    })
-  })
+//   let UserDistributioinObject = {
+//     startDate: startDate,
+//     endDate: endDate,
+//     totalFamilyMembers: usersDistribution.TotalFamilyMembers,
+//     newFamilyMembersBetweenRange: usersDistribution.newFamilyMembersBasedOnDate,
+//     newUserBetweenRange: usersDistribution.newRegistrationBasedOnDate,
+//     totalUsers: usersDistribution.totalRegistration,
+//     maleCount: maleCount,
+//     femaleCount: femaleCount,
+//     othersCount: othersCount
+//   }
 
 
 
-  let ReviewsArray = [];
-
-  userReviews.forEach((reviewItem) => {
-
-    ReviewsArray.push({ startDate: startDate, endDate: endDate, review: reviewItem.review })
-  })
-
-  // let SessionStatsArray = [];
-
-  // userSessionStats.forEach(() => {
+//   // question , answer ,  count , percentage
+//   let preferenceDistributionArray = [];
 
 
-  // })
-
-  /***
-   * 
-   * sheets generation 
-   * 
-   */
-
-  const workbook = XLSX.utils.book_new();
+//   userPreferenceDistribution.forEach((questionAndanswer) => {
 
 
-  let usersDistributionworksheet = XLSX.utils.json_to_sheet([UserDistributioinObject]);
+//     questionAndanswer.answers.forEach((answerItem) => {
 
-  // 20 character width on each columns
-  usersDistributionworksheet["!cols"] = [
-    { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 20 },
-    { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 20 },
-    { wch: 20 }
-  ];
+//       let preferenceDistributionObject = {
+//         startDate: startDate,
+//         endDate: endDate,
+//         question: questionAndanswer.question,
+//         answer: answerItem.answer,
+//         count: answerItem.count,
+//         percentage: answerItem.percentage,
+//       }
+//       preferenceDistributionArray.push(preferenceDistributionObject)
+//     })
 
+//     preferenceDistributionArray.push({
+//       startDate: "",
+//       endDate: "",
+//       question: "",
+//       answer: "",
+//       count: "",
+//       percentage: ""
+//     })
 
-
-  let userPreferenceDistributionWorkSheet = XLSX.utils.json_to_sheet(preferenceDistributionArray);
-
-  userPreferenceDistributionWorkSheet["!cols"] = [
-    { wch: 40 }, { wch: 40 },
-    { wch: 40 }, { wch: 40 },
-    { wch: 40 }, { wch: 40 },]
-
-
-  let userIssuesDistributionWorkSheet = XLSX.utils.json_to_sheet(issueDistributionArray);
-
-  userIssuesDistributionWorkSheet["!cols"] = [
-    { wch: 20 }, { wch: 20 },
-    { wch: 20 }, { wch: 20 },
-    { wch: 20 }, { wch: 20 },]
+//   })
 
 
+//   // main issues  , percentage,  subissue percentage
+//   let issueDistributionArray = [];
 
-  let ReviewsWorkSheet = XLSX.utils.json_to_sheet(ReviewsArray);
+//   usersIssueDistribution.forEach((MainIssueAndSubIssues) => {
 
-  ReviewsWorkSheet["!cols"] = [
-    { wch: 20 }, { wch: 20 },
-    { wch: 20 },]
 
-  XLSX.utils.book_append_sheet(workbook, usersDistributionworksheet, "user_distribution-anlytics");
-  XLSX.utils.book_append_sheet(workbook, userPreferenceDistributionWorkSheet, "user-preference-anlytics");
-  XLSX.utils.book_append_sheet(workbook, userIssuesDistributionWorkSheet, "user-issues-anlytics");
-  XLSX.utils.book_append_sheet(workbook, ReviewsWorkSheet, "reviews");
+//     MainIssueAndSubIssues.subissues.forEach((subissueItem) => {
 
-  // download to client browser
-  XLSX.writeFile(workbook, `zariyaaAnalytics ${startDate}-${endDate}.xlsx`);
-}
+//       let issueDistributionObject = {
+//         startDate: startDate,
+//         endDate: endDate,
+//         mainIssue: MainIssueAndSubIssues.question,
+//         MainIssuepercentage: MainIssueAndSubIssues.percentage,
+//         subIssue: subissueItem.subissue,
+//         SubIssuePercentage: subissueItem.percentage
+//       }
+//       issueDistributionArray.push(issueDistributionObject)
+//     })
+//     issueDistributionArray.push({
+//       startDate: "",
+//       endDate: "",
+//       mainIssue: "",
+//       MainIssuepercentage: "",
+//       subIssue: "",
+//       SubIssuePercentage: ""
+//     })
+//   })
+
+
+
+//   let ReviewsArray = [];
+
+//   userReviews.forEach((reviewItem) => {
+
+//     ReviewsArray.push({ startDate: startDate, endDate: endDate, review: reviewItem.review })
+//   })
+
+//   // let SessionStatsArray = [];
+
+//   // userSessionStats.forEach(() => {
+
+
+//   // })
+
+//   /***
+//    * 
+//    * sheets generation 
+//    * 
+//    */
+
+//   const workbook = XLSX.utils.book_new();
+
+
+//   let usersDistributionworksheet = XLSX.utils.json_to_sheet([UserDistributioinObject]);
+
+//   // 20 character width on each columns
+//   usersDistributionworksheet["!cols"] = [
+//     { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 20 },
+//     { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 20 },
+//     { wch: 20 }
+//   ];
+
+
+
+//   let userPreferenceDistributionWorkSheet = XLSX.utils.json_to_sheet(preferenceDistributionArray);
+
+//   userPreferenceDistributionWorkSheet["!cols"] = [
+//     { wch: 40 }, { wch: 40 },
+//     { wch: 40 }, { wch: 40 },
+//     { wch: 40 }, { wch: 40 },]
+
+
+//   let userIssuesDistributionWorkSheet = XLSX.utils.json_to_sheet(issueDistributionArray);
+
+//   userIssuesDistributionWorkSheet["!cols"] = [
+//     { wch: 20 }, { wch: 20 },
+//     { wch: 20 }, { wch: 20 },
+//     { wch: 20 }, { wch: 20 },]
+
+
+
+//   let ReviewsWorkSheet = XLSX.utils.json_to_sheet(ReviewsArray);
+
+//   ReviewsWorkSheet["!cols"] = [
+//     { wch: 20 }, { wch: 20 },
+//     { wch: 20 },]
+
+//   XLSX.utils.book_append_sheet(workbook, usersDistributionworksheet, "user_distribution-anlytics");
+//   XLSX.utils.book_append_sheet(workbook, userPreferenceDistributionWorkSheet, "user-preference-anlytics");
+//   XLSX.utils.book_append_sheet(workbook, userIssuesDistributionWorkSheet, "user-issues-anlytics");
+//   XLSX.utils.book_append_sheet(workbook, ReviewsWorkSheet, "reviews");
+
+//   // download to client browser
+//   XLSX.writeFile(workbook, `zariyaaAnalytics ${startDate}-${endDate}.xlsx`);
+// }
 export default AdminNavbarComp;
 
 
@@ -627,5 +655,12 @@ function getlastYearEnd(currentDate) {
 
   let currentYear = currentDate.getFullYear()
   return new Date(currentYear - 1, 0, 1);
+
+}
+
+
+const GetReportAPICALL = async () => {
+
+
 
 }
