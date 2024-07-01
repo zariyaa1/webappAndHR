@@ -175,15 +175,12 @@ const AdminNavbarComp = () => {
 
       const blob = new Blob([blobData], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
-
-
       const a = document.createElement('a');
       a.href = url;
       a.download = 'report.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-
       // Clean up the URL object
       window.URL.revokeObjectURL(url);
     } catch (error) {
